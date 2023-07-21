@@ -95,16 +95,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zerotier-one \
     && rm -rf /var/lib/apt/lists/*
 
+VOLUME /var/lib/zerotier-one
 # Expose the ports required by ZeroTier
 EXPOSE 9993/udp
 EXPOSE 9993/tcp
 
+# Start the ZeroTier service
+CMD ["zerotier-one -d"]
+
 # Set the network ID as a build argument (can be passed during the build)
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
-
-# Start the ZeroTier service
-CMD ["zerotier-one -d"]
 
 # Join the ZeroTier network using the provided network ID during the build
 RUN zerotier-cli join ${ZT_NETWORK_ID}
