@@ -46,7 +46,7 @@ EXPOSE 9993/udp
 EXPOSE 9993/tcp
 
 # Start the ZeroTier service
-CMD ["zerotier-one -d"]
+CMD ["zerotier-one"]
 
 # Set the network ID as a build argument (can be passed during the build)
 #ARG ZT_NETWORK_ID
