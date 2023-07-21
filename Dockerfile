@@ -103,10 +103,9 @@ EXPOSE 9993/tcp
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
 
-RUN zerotier-one -d
+# Start the ZeroTier service
+CMD ["zerotier-one -d"]
 
 # Join the ZeroTier network using the provided network ID during the build
 RUN zerotier-cli join ${ZT_NETWORK_ID}
 
-# Start the ZeroTier service
-CMD ["zerotier-one"]
