@@ -77,9 +77,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -SLO "https://github.com/zerotier/ZeroTierOne/releases/download/1.8.4/zerotier-one_1.8.4_arm64.deb" \
-    && dpkg -i zerotier-one_1.8.4_arm64.deb \
-    && rm zerotier-one_1.8.4_arm64.deb
+# Add the GPG key for ZeroTier One
+RUN curl https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg | gpg --dearmor | tee /usr/share/keyrings/zerotierone-archive-keyring.gpg >/dev/null
+
+# Set the codename for the current operating system
+RUN echo "deb http://download.zerotier.com/debian/$(cat /etc/os-release | grep -oP 'VERSION_CODENAME=\K\w+' | tr '[:upper:]' '[:lower:]') $(cat /etc/os-release | grep -oP 'VERSION_CODENAME=\K\w+' | tr '[:upper:]' '[:lower:]') main" | tee /etc/apt/sources.list.d/zerotier.list
+
+# Update the package list and install ZeroTier One
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    zerotier-one \
+    && rm -rf /var/lib/apt/lists/*
 
 # Expose the ports required by ZeroTier
 EXPOSE 9993/udp
