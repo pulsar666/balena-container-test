@@ -77,6 +77,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Install required packages for ZeroTier One installation
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    gnupg \
+    apt-utils \
+    && rm -rf /var/lib/apt/lists/*
+
 # Add the GPG key for ZeroTier One
 RUN curl https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg | gpg --dearmor | tee /usr/share/keyrings/zerotierone-archive-keyring.gpg >/dev/null
 
