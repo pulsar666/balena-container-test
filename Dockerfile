@@ -81,7 +81,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg | gpg --dearmor | tee /usr/share/keyrings/zerotierone-archive-keyring.gpg >/dev/null
 
 # Set the codename for the current operating system
-RUN echo "deb http://download.zerotier.com/debian/$(cat /etc/os-release | grep -oP 'VERSION_CODENAME=\K\w+' | tr '[:upper:]' '[:lower:]') $(cat /etc/os-release | grep -oP 'VERSION_CODENAME=\K\w+' | tr '[:upper:]' '[:lower:]') main" | tee /etc/apt/sources.list.d/zerotier.list
+RUN echo "deb [signed-by=/usr/share/keyrings/zerotierone-archive-keyring.gpg] http://download.zerotier.com/debian/$(cat /etc/os-release | grep -oP 'VERSION_CODENAME=\K\w+' | tr '[:upper:]' '[:lower:]') $(cat /etc/os-release | grep -oP 'VERSION_CODENAME=\K\w+' | tr '[:upper:]' '[:lower:]') main" | tee /etc/apt/sources.list.d/zerotier.list
 
 # Update the package list and install ZeroTier One
 RUN apt-get update && apt-get install -y --no-install-recommends \
