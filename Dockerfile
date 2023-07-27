@@ -49,9 +49,9 @@ VOLUME /var/lib/zerotier-one
 EXPOSE 9993/udp
 EXPOSE 9993/tcp
 	
-# Start the ZeroTier service
-CMD ["zerotier-one"]
+WORKDIR /scripts
+COPY scripts/zt-init.sh .
+RUN chmod +x zt-init.sh
 
-# Join the ZeroTier network using the provided network ID at runtime
-ENTRYPOINT ["zerotier-cli", "join", "${ZT_NETWORK_ID}"]
+CMD /bin/bash zt-init.sh
 
