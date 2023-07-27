@@ -40,14 +40,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zerotier-one \
     && rm -rf /var/lib/apt/lists/*
 
-VOLUME /var/lib/zerotier-one
-# Expose the ports required by ZeroTier
-EXPOSE 9993/udp
-EXPOSE 9993/tcp
-
 # Set the network ID as a build argument (can be passed during the build)
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
+	
+# Copy the zt-join.sh script into the container
+COPY zt-join.sh /usr/src/app/zt-init.sh
+
+# Set the script as executable
+RUN chmod +x /usr/src/app/zt-init.sh
 
 # Join the ZeroTier network using the provided network ID at runtime
 CMD ["sh", "-c", "zerotier-one && zerotier-cli join $ZT_NETWORK_ID"]
