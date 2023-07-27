@@ -49,9 +49,9 @@ EXPOSE 9993/tcp
 CMD ["zerotier-one"]
 
 # Set the network ID as a build argument (can be passed during the build)
-#ARG ZT_NETWORK_ID
-#ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
+ARG ZT_NETWORK_ID
+ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
 
 # Join the ZeroTier network using the provided network ID during the build
-#RUN zerotier-cli join ${ZT_NETWORK_ID}
+RUN zerotier-cli join ${ZT_NETWORK_ID}
 
