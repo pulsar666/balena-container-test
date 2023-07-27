@@ -50,7 +50,7 @@ EXPOSE 9993/udp
 EXPOSE 9993/tcp
 	
 WORKDIR /scripts
-COPY scripts/zt-init.sh .
+COPY zt-init.sh .
 RUN chmod +x zt-init.sh
 
 CMD /bin/bash zt-init.sh
