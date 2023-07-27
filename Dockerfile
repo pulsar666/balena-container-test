@@ -45,13 +45,10 @@ VOLUME /var/lib/zerotier-one
 EXPOSE 9993/udp
 EXPOSE 9993/tcp
 
-# Start the ZeroTier service
-CMD ["zerotier-one"]
-
 # Set the network ID as a build argument (can be passed during the build)
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
 
 # Join the ZeroTier network using the provided network ID at runtime
-CMD ["zerotier-cli", "join", "$ZT_NETWORK_ID"]
+CMD ["sh", "-c", "zerotier-one && zerotier-cli join $ZT_NETWORK_ID"]
 
