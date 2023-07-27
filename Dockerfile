@@ -50,6 +50,6 @@ COPY zt-init.sh /usr/src/app/zt-init.sh
 # Set the script as executable
 RUN chmod +x /usr/src/app/zt-init.sh
 
-# Join the ZeroTier network using the provided network ID at runtime
-CMD ["sh", "-c", "zerotier-one && zerotier-cli join $ZT_NETWORK_ID"]
+# Use the zt-init.sh script as the startup command
+CMD ["/usr/src/app/zt-init.sh"]
 
