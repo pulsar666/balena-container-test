@@ -52,9 +52,6 @@ EXPOSE 9993/tcp
 # Copy the zt-init.sh script into the container
 COPY zt-init.sh /usr/src/app/zt-init.sh
 
-# Set the script as executable
-RUN chmod +x /usr/src/app/zt-init.sh
-
-# Use the zt-init.sh script as the startup command
-CMD ["/usr/src/app/zt-init.sh"]
+# Set the script as executable and use it as the startup command
+CMD ["/bin/bash", "-c", "/usr/src/app/zt-init.sh"]
 
