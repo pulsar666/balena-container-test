@@ -53,5 +53,5 @@ EXPOSE 9993/tcp
 CMD ["zerotier-one"]
 
 # Join the ZeroTier network using the provided network ID at runtime
-RUN zerotier-cli join ${ZT_NETWORK_ID}
+ENTRYPOINT ["zerotier-cli", "join", "${ZT_NETWORK_ID}"]
 
