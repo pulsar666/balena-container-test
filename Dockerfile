@@ -44,8 +44,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
 	
-# Copy the zt-join.sh script into the container
-COPY zt-join.sh /usr/src/app/zt-init.sh
+# Copy the zt-init.sh script into the container
+COPY zt-init.sh /usr/src/app/zt-init.sh
 
 # Set the script as executable
 RUN chmod +x /usr/src/app/zt-init.sh
