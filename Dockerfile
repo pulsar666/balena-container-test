@@ -48,7 +48,7 @@ EXPOSE 9993/tcp
 # Start the ZeroTier service
 CMD ["zerotier-one"]
 
-# Set the network ID as a build argument (can be passed during the build)
+#Set the network ID as a build argument (can be passed during the build)
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
 
