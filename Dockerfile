@@ -43,6 +43,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Set the network ID as a build argument (can be passed during the build)
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
+
+VOLUME /var/lib/zerotier-one
+# Expose the ports required by ZeroTier
+EXPOSE 9993/udp
+EXPOSE 9993/tcp
 	
 # Copy the zt-init.sh script into the container
 COPY zt-init.sh /usr/src/app/zt-init.sh
