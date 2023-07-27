@@ -52,6 +52,6 @@ CMD ["zerotier-one"]
 ARG ZT_NETWORK_ID
 ENV ZT_NETWORK_ID=${ZT_NETWORK_ID}
 
-# Join the ZeroTier network using the provided network ID during the build
-RUN /bin/sh -c "zerotier-cli join ${ZT_NETWORK_ID}"
+# Join the ZeroTier network using the provided network ID at runtime
+ENTRYPOINT ["sh", "-c", "/usr/sbin/zerotier-one && zerotier-cli join ${ZT_NETWORK_ID}"]
 
